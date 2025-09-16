@@ -1,21 +1,46 @@
 package com.Sistema_basico_Blog.miBlog.modelo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
 public class Posteo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titulo;
-    private String autor;
+    @ManyToOne
+    @JsonBackReference("posteos")
+    private Autor autor;
+    @OneToMany(mappedBy = "posteo", cascade = CascadeType.ALL)
+    @JsonManagedReference("comentariosPost")
+    private List<Comentario> comentarios = new ArrayList<>();
 
-    public Posteo(Long id, String autor, String titulo) {
-        this.id = id;
-        this.autor = autor;
-        this.titulo = titulo;
+    public Posteo() {
     }
 
-    public String getAutor() {
+    public Posteo(String titulo, Autor autor, List<Comentario> comentarios) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.comentarios = comentarios;
+    }
+
+    public Posteo(Long id, String titulo, Autor autor, List<Comentario> comentarios) {
+        this.id = id;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.comentarios = comentarios;
+    }
+
+    public Autor getAutor() {
         return autor;
     }
 
-    public void setAutor(String autor) {
+    public void setAutor(Autor autor) {
         this.autor = autor;
     }
 
