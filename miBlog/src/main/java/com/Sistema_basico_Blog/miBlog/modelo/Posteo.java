@@ -14,6 +14,7 @@ public class Posteo {
     private Long id;
     private String titulo;
     @ManyToOne
+    @JoinColumn(name = "autor_id")
     @JsonBackReference("posteos")
     private Autor autor;
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
