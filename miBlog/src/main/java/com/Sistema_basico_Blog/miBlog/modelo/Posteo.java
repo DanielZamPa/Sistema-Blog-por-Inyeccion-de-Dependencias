@@ -16,7 +16,7 @@ public class Posteo {
     @ManyToOne
     @JsonBackReference("posteos")
     private Autor autor;
-    @OneToMany(mappedBy = "posteo", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     @JsonManagedReference("comentariosPost")
     private List<Comentario> comentarios = new ArrayList<>();
 
@@ -58,5 +58,13 @@ public class Posteo {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
     }
 }//Cierre de clase Posteo

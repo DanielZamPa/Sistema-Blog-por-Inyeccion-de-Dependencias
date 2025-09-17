@@ -18,7 +18,7 @@ public class Autor {
     @JsonManagedReference("posteos")
     private List<Posteo> posteos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "createdAt", cascade = CascadeType.ALL)
     @JsonManagedReference("comentarios")
     private List<Comentario> comentarios = new ArrayList<>();
 
